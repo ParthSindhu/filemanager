@@ -89,23 +89,20 @@ class FileNavigator extends Component {
     this.initialize();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps, prevState) {
     const needToNavigate =
-      (this.props.initialResourceId !== nextProps.initialResourceId) &&
-      ((this.state.resource && this.state.resource.id) !== nextProps.initialResourceId);
-
+      (prevProps.initialResourceId !== this.props.initialResourceId) &&
+      ((prevState.resource && prevState.resource.id) !== this.props.initialResourceId);
     if (needToNavigate) {
-      this.navigateToDir(nextProps.initialResourceId);
+      this.navigateToDir(this.props.initialResourceId);
     }
-
-    if (!isEqual(this.props.apiOptions, nextProps.apiOptions)) {
-      const { apiOptions, capabilities } = nextProps;
+    if (!isEqual(prevProps.apiOptions, this.props.apiOptions)) {
+      const { apiOptions, capabilities } = this.props;
       const capabilitiesProps = this.getCapabilitiesProps();
       const initializedCapabilities = capabilities(apiOptions, capabilitiesProps);
       this.setState({ initializedCapabilities });
     }
   }
-
   componentWillUnmount() {
     this._isMounted = false
   }
