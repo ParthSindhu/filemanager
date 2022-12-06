@@ -1,14 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import Showroom from '@opuscapita/react-showroom-client';
 import '@opuscapita/opuscapita-ui';
 
-let element = document.getElementById('main');
-let showroom = React.createElement(Showroom, {
+// let element = document.getElementById('main');
+// let showroom = React.createElement(Showroom, {
+//   loaderOptions: {
+//     componentsInfo: require('.opuscapita-showroom/componentsInfo'),
+//     packagesInfo: require('.opuscapita-showroom/packageInfo')
+//   }
+// });
+
+// ReactDOM.render(showroom, element);
+const element = document.getElementById('main');
+
+const root = ReactDOM.createRoot(element);
+const showroom = React.createElement(Showroom, {
   loaderOptions: {
     componentsInfo: require('.opuscapita-showroom/componentsInfo'),
     packagesInfo: require('.opuscapita-showroom/packageInfo')
   }
 });
 
-ReactDOM.render(showroom, element);
+root.render(showroom);
