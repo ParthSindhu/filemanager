@@ -45,16 +45,16 @@ class ScrollOnMouseOut extends Component {
     window.addEventListener('mouseup', this.handleWindowMouseUp);
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.captureCursor) {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.captureCursor) {
       this.startCaptureCursor();
     } else {
       this.stopCaptureCursor();
     }
 
-    if (nextState.isCursorAbove && (this.state.isCursorAbove !== nextState.isCursorAbove)) {
+    if (this.state.isCursorAbove && (prevState.isCursorAbove !== this.state.isCursorAbove)) {
       this.handleCursorAbove();
-    } else if (nextState.isCursorBellow && (this.state.isCursorBellow !== nextState.isCursorBellow)) {
+    } else if (this.state.isCursorBellow && (prevState.isCursorBellow !== this.state.isCursorBellow)) {
       this.handleCursorBellow();
     }
   }
